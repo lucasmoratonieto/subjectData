@@ -21,7 +21,9 @@ function Login() {
       });
 
       localStorage.setItem('jwtToken', response.data.token);
-      console.log(response.data.token)
+      localStorage.setItem('userEmail', formData.email)
+
+      // console.log(response.data.token)
 
       // Configura Axios para enviar el token en futuras peticiones
       axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;

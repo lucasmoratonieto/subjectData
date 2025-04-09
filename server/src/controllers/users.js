@@ -29,6 +29,7 @@ export const checkEmail = async (req, res) => {
 
 
 
+
     // Ver por que me esta dando problemas.
     if (userDB.length === 0) {
       return res.status(401).json({ error: 'Credenciales inválidas' });
@@ -47,7 +48,8 @@ export const checkEmail = async (req, res) => {
 
     // 4. Si todo es correcto, generar token JWT
     const token = generateToken(user.id); // Tu función para generar JWT
-    res.status(200).json({ token });
+    const username = user.username;
+    res.status(200).json({ token, username });
 
   } catch (error) {
     res.status(500).json({ error: 'Error en el servidor' });

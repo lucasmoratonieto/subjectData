@@ -3,8 +3,19 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import axios from 'axios';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+axios.interceptors.response.use(
+  response => response,
+  error => {
+    if (error.response?.status === 401) {
+      localStorage.removeItem('jwtToken');
+      window.location.href = '/login';
+    }
+    return Promise.reject(error);
+  }
+);
 root.render(
   <React.StrictMode>
     <App />

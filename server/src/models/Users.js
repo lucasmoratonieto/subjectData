@@ -10,7 +10,12 @@ const Users = {
     const query = 'INSERT INTO users (email, password_hash) VALUES ($1, $2) RETURNING *';
     const result = await pool.query(query, [email, password_hash]);
     return result;
-  }
+  },
+
+  userName: async (email) => {
+    const { rows } = await pool.query('SELECT username FROM users WHERE email = $1', [email]);
+    return rows;
+  },
 };
 
 export default Users;
