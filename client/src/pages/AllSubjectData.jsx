@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import NewSubjectForm from '../components/forms/newSubjectForm/NewSubjectForm';
 import { fetchSubjects } from '../hooks/fetchSubjects';
@@ -31,7 +32,7 @@ function AllSubjectData() {
       <ul>
         {subjectData.map(subject => (
           <li key={subject.id}>
-            {subject.name} ➡️ {subject.credits}
+            <Link to={`/SubjectData/${subject.id}`}>{subject.name}</Link> ➡️ {subject.credits}
             <button onClick={() => handleDelete(subject.id)}>X</button>
           </li>
         ))}

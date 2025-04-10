@@ -16,8 +16,8 @@ app.use(cors({
 app.use(express.json());
 
 // Rutas
-app.use('/api/subjects', subjectsRoutes);
 app.use('/login', userRoutes);
+app.use('/api/subjects', subjectsRoutes);
 app.use('/api/userName', userName);
 
 
