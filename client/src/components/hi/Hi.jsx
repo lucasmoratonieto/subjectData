@@ -9,7 +9,6 @@ const Hi = () => {
   const [userName, setuserName] = useState();
   const userEmail = localStorage.getItem('userEmail');
 
-
   const getName = async () => {
 
     try {
@@ -20,7 +19,8 @@ const Hi = () => {
           }
         }
       );
-      setuserName(response.data[0].username)
+
+      setuserName(response.data.username.username)
 
     } catch (err) {
       console.error('Error fetching', err)
