@@ -16,6 +16,7 @@ function AllSubjectData() {
   }, []);
 
   const handleDelete = async (id) => {
+    alert('Seguro que quieres eliminar al paciente?')
     try {
       await axios.delete(`http://localhost:5000/api/subjects/${id}`)
       loadData()
@@ -32,7 +33,7 @@ function AllSubjectData() {
       <ul>
         {subjectData.map(subject => (
           <li key={subject.id}>
-            <Link to={`/SubjectData/${subject.id}`}>{subject.name}</Link> ➡️ {subject.credits}
+            <Link to={`/SubjectData/${subject.id}`}>{subject.name}</Link>
             <button onClick={() => handleDelete(subject.id)}>X</button>
           </li>
         ))}

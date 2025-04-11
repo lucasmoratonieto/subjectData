@@ -1,4 +1,5 @@
 import sql from '../config/db.js';
+import { editData } from '../controllers/subjects.js';
 
 const Subject = {
   getAll: async () => {
@@ -10,11 +11,11 @@ const Subject = {
     }
   },
 
-  create: async (name, credits) => {
+  create: async (name) => {
     try {
       const [newSubject] = await sql`
-        INSERT INTO subjects (name, credits)
-        VALUES (${name}, ${credits})
+        INSERT INTO subjects (name)
+        VALUES (${name})
         RETURNING *
       `;
       return newSubject;
@@ -33,6 +34,27 @@ const Subject = {
       return deletedSubject;
     } catch (error) {
       throw new Error(`Error al eliminar asignatura: ${error.message}`);
+    }
+  },
+
+
+  updateData: async (id, data) => {
+    try {
+      const [updated] = await sql`
+        UPDATE subjects SET
+          ta = ${data.ta},
+          wc = ${data.wc},
+          temperatura = ${data.temperatura},
+          medicacion = ${data.medicacion},
+          evolutivo = ${data.evolutivo}
+        WHERE id = ${id}
+        RETURNING *
+      `;
+
+      if (!updated) throw new Error('Registro no encontrado');
+      return updated;
+    } catch (error) {
+      throw new Error(`Error al actualizar: ${error.message}`);
     }
   }
 };
